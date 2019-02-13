@@ -2,16 +2,18 @@ package com.example.demo;
 
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 
 import java.util.StringJoiner;
 
 @RestController
 @RequestMapping("/math")
 public class MathController {
+    double pi = 3.141592653589793;
 
     @GetMapping("/pi")
     public String myMethod() {
-        return "3.141592653589793";
+        return Double.toString(pi);
     }
 
     @GetMapping("/calculate")
@@ -38,5 +40,15 @@ public class MathController {
         rectangle.add(Integer.toString(length)).add(Integer.toString(width)).add(Integer.toString(height));
 
         return "The volume of a " + rectangle.toString() + " rectangle is " + result;
+    }
+
+    @PostMapping(value = "/area", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String areaMethod(Shape shape) {
+        MathHelper mathHelper = new MathHelper();
+
+        String result = mathHelper.area(shape);
+
+
+        return result;
     }
 }

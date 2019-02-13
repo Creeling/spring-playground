@@ -68,4 +68,28 @@ public class MathHelper {
         return result;
     }
 
+    public String area(Shape shape) {
+        String result = "";
+        double pi = 3.141592653589793;
+        if(shape.getType().equals("rectangle")) {
+            if(shape.getWidth() == 0 || shape.getHeight() == 0){
+                result = "Invalid";
+            }
+            else {
+                String area = String.valueOf(shape.getHeight() * shape.getWidth());
+                result = "Area of a " + Integer.toString(shape.getWidth()) + "x" + Integer.toString(shape.getHeight()) + " " + shape.getType() + " is " + area;
+            }
+        }
+        else if (shape.getType().equals("circle")) {
+            if (shape.getRadius() == 0) {
+                result = "Invalid";
+            }
+            else {
+                String radius = Integer.toString(shape.getRadius());
+                String area = Double.toString(shape.getRadius() * (pi * pi));
+                result = "Area of a circle with a radius of " + radius + " is " + area;
+            }
+        }
+        return result;
+    }
 }
