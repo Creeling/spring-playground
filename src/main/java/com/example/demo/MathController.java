@@ -29,6 +29,10 @@ public class MathController {
             int multiplyResult = Integer.parseInt(x) * Integer.parseInt(y);
             result = x + " * " + y  + " = " + Integer.toString(multiplyResult);
         }
+        else if (operation.equals("divide")) {
+            int divideResult = Integer.parseInt(x) / Integer.parseInt(y);
+            result = x + " / " + y  + " = " + Integer.toString(divideResult);
+        }
         return result;
     }
 }

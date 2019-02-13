@@ -48,4 +48,11 @@ public class MathControllerTest {
                 .andExpect(content().string("4 * 6 = 24"));
     }
 
+    @Test
+    public void testCalculateEndpointWithDivide() throws Exception {
+        this.mvc.perform(get("/math/calculate?operation=divide&x=30&y=5").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("30 / 5 = 6"));
+    }
+
 }
