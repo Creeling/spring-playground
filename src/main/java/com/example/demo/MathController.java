@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.StringJoiner;
 
 @RestController
@@ -22,23 +21,9 @@ public class MathController {
 
     @GetMapping("/calculate")
     public String calculateMethod(@RequestParam(defaultValue = "add") String operation, @RequestParam String x, @RequestParam String y) {
-        String result = "";
-        if (operation.equals("add")) {
-            int addResult = Integer.parseInt(x) + Integer.parseInt(y);
-            result = x + " + " + y  + " = " + Integer.toString(addResult);
-        }
-        else if (operation.equals("subtract")) {
-            int subtractResult = Integer.parseInt(x) - Integer.parseInt(y);
-            result = x + " - " + y  + " = " + Integer.toString(subtractResult);
-        }
-        else if (operation.equals("multiply")) {
-            int multiplyResult = Integer.parseInt(x) * Integer.parseInt(y);
-            result = x + " * " + y  + " = " + Integer.toString(multiplyResult);
-        }
-        else if (operation.equals("divide")) {
-            int divideResult = Integer.parseInt(x) / Integer.parseInt(y);
-            result = x + " / " + y  + " = " + Integer.toString(divideResult);
-        }
+        MathHelper mathHelper = new MathHelper();
+        String result = mathHelper.calculate(operation, Integer.parseInt(x), Integer.parseInt(y));
+
         return result;
     }
 
