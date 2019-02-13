@@ -8,7 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.StringJoiner;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,6 +70,22 @@ public class MathControllerTest {
         this.mvc.perform(get("/math/sum?n=4&n=5&n=6").accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(content().string("4 + 5 + 6 = 15"));
+    }
+
+    @Test
+    public void testVolumeEndpoint() throws Exception {
+        int length = 3;
+        int width = 4;
+        int height = 5;
+        int result = length * width * height;
+        StringJoiner stringJoiner = new StringJoiner("x","","");
+        stringJoiner.add(Integer.toString(length)).add(Integer.toString(width)).add(Integer.toString(height));
+        String rectangle = stringJoiner.toString();
+
+
+        this.mvc.perform(post(String.format("/math/volume/%d/%d/%d",3,4,5)).accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.format("The volume of a %s rectangle is %s",rectangle,Integer.toString(result))));
     }
 
 }

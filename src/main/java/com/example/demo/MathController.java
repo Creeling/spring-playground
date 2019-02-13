@@ -1,10 +1,9 @@
 package com.example.demo;
 
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.StringJoiner;
 
 @RestController
 @RequestMapping("/math")
@@ -29,5 +28,15 @@ public class MathController {
         String result = mathHelper.sumMultipleNumbers(queryString);
 
         return result;
+    }
+
+    @RequestMapping("/volume/{length}/{width}/{height}")
+    public String volumeMethod(@PathVariable int length, @PathVariable int width, @PathVariable int height) {
+
+        int result = length * width * height;
+        StringJoiner rectangle = new StringJoiner("x","","");
+        rectangle.add(Integer.toString(length)).add(Integer.toString(width)).add(Integer.toString(height));
+
+        return "The volume of a " + rectangle.toString() + " rectangle is " + result;
     }
 }
