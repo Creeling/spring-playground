@@ -55,4 +55,18 @@ public class MathControllerTest {
                 .andExpect(content().string("30 / 5 = 6"));
     }
 
+    @Test
+    public void testCalculateEndpointWithDefaultParam() throws Exception {
+        this.mvc.perform(get("/math/calculate?x=4&y=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 6 = 10"));
+    }
+
+    @Test
+    public void testSumEndpoint() throws Exception {
+        this.mvc.perform(get("/math/sum?n=4&n=5&n=6").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4 + 5 + 6 = 15"));
+    }
+
 }
