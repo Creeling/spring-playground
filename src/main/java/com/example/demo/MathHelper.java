@@ -1,5 +1,11 @@
 package com.example.demo;
 
+import org.springframework.util.MultiValueMap;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.StringJoiner;
+
 public class MathHelper {
 
     public String calculate(String operation, int x, int y) {
@@ -39,6 +45,27 @@ public class MathHelper {
     public String divide(int x, int y) {
         int divided = x / y;
         return Integer.toString(x) + " / " + Integer.toString(y)  + " = " + Integer.toString(divided);
+    }
+
+    public String sumMultipleNumbers(MultiValueMap<String,String> queryString) {
+        StringJoiner stringJoiner = new StringJoiner(" + ","","");
+        int sumResult = 0;
+
+        Iterator<String> mapIterator = queryString.keySet().iterator();
+
+        while(mapIterator.hasNext()) {
+            String key = mapIterator.next();
+            Collection<String> values = queryString.get(key);
+
+            for(String value : values) {
+                sumResult += Integer.parseInt(value);
+                stringJoiner.add(value);
+            }
+        }
+        String result = stringJoiner.toString();
+        result += " = " + Integer.toString(sumResult);
+
+        return result;
     }
 
 }

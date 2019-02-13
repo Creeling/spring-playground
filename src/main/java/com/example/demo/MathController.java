@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.StringJoiner;
-
 @RestController
 @RequestMapping("/math")
 public class MathController {
@@ -29,22 +25,8 @@ public class MathController {
 
     @GetMapping("/sum")
     public String sumMethod(@RequestParam MultiValueMap<String, String> queryString) {
-        StringJoiner stringJoiner = new StringJoiner(" + ","","");
-        int sumResult = 0;
-
-        Iterator<String> mapIterator = queryString.keySet().iterator();
-
-        while(mapIterator.hasNext()) {
-            String key = mapIterator.next();
-            Collection<String> values = queryString.get(key);
-
-            for(String value : values) {
-                sumResult += Integer.parseInt(value);
-                stringJoiner.add(value);
-            }
-        }
-        String result = stringJoiner.toString();
-        result += " = " + Integer.toString(sumResult);
+        MathHelper mathHelper = new MathHelper();
+        String result = mathHelper.sumMultipleNumbers(queryString);
 
         return result;
     }
