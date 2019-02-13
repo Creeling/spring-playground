@@ -86,7 +86,7 @@ public class MathHelper {
             }
             else {
                 String radius = Integer.toString(shape.getRadius());
-                String area = Double.toString(shape.getRadius() * (pi * pi));
+                String area = Double.toString((shape.getRadius() * shape.getRadius()) * pi);
                 result = "Area of a circle with a radius of " + radius + " is " + area;
             }
         }

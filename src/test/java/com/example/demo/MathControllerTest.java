@@ -93,7 +93,7 @@ public class MathControllerTest {
     public void testAreaEndpointValidCircle() throws Exception {
         int radius = 2;
         double PI = 3.141592653589793;
-        double area = radius * (PI * PI);
+        double area = (radius * radius) * PI ;
 
         MockHttpServletRequestBuilder request = post("/math/area")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
