@@ -16,7 +16,7 @@ public class ShapeTest {
     }
 
     @Test
-    public void getTypeWithOneReturnsShapeType() {
+    public void getTypeWithCircleReturnsShapeType() {
         shape.setType("circle");
         String actual = shape.getType();
 
