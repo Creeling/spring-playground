@@ -50,18 +50,14 @@ public class MathHelper {
     public String sumMultipleNumbers(MultiValueMap<String,String> queryString) {
         StringJoiner stringJoiner = new StringJoiner(" + ","","");
         int sumResult = 0;
+        
+        Collection<String> values = queryString.get("n");
 
-        Iterator<String> mapIterator = queryString.keySet().iterator();
-
-        while(mapIterator.hasNext()) {
-            String key = mapIterator.next();
-            Collection<String> values = queryString.get(key);
-
-            for(String value : values) {
-                sumResult += Integer.parseInt(value);
-                stringJoiner.add(value);
-            }
+        for(String value : values) {
+            sumResult += Integer.parseInt(value);
+            stringJoiner.add(value);
         }
+
         String result = stringJoiner.toString();
         result += " = " + Integer.toString(sumResult);
 
